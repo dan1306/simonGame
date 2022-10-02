@@ -4,8 +4,23 @@ let buttonColours = ["red", "blue", "green", "yellow"]
 
 let gamePattern = []
 
+let started = false
+
+let level = 0
+
+$(document).on('keypress', function(e) {
+
+
+    if (!started) {
+      nextSequence()
+      started = true
+    }
+  })
 
 function nextSequence() {
+
+    $('h1').text(`Level ${level}`)
+
     let randomNumber = Math.floor(Math.random() * 4)
 
     let randomChosenColour = buttonColours[randomNumber]
