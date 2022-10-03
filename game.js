@@ -8,15 +8,15 @@ let started = false
 
 let level = 0
 
-$(document).on('keypress', function(e) {
+$(document).on('keypress', function (e) {
 
 
     if (!started) {
-      nextSequence()
-      started = true
+        nextSequence()
+        started = true
     }
 })
-  
+
 function checkAnswer(currentLevel) {
     if (userClickedPattern[currentLevel] == gamePattern[currentLevel]) {
         if (userClickedPattern.length == gamePattern.length) {
@@ -24,22 +24,24 @@ function checkAnswer(currentLevel) {
             setTimeout(() => {
 
                 nextSequence()
-              }, 1000)
-              userClickedPattern = []
+            }, 1000)
+            userClickedPattern = []
         }
     } else {
         playSound('wrong')
-        
+
         $('body').addClass('game-over')
 
         setTimeout(() => {
-    
-          $('body').removeClass('game-over')
+
+            $('body').removeClass('game-over')
         }, 1000)
-    
+
         $("h1").text("Game Over, Press Any Key to Restart")
+
+        startOver()
     }
-    
+
 }
 
 function nextSequence() {
@@ -76,7 +78,14 @@ $('.btn').click(function () {
 
 function animatePress(clr) {
     $("#" + clr).addClass("pressed");
-    setTimeout(function() {
-      $("#" + clr).removeClass("pressed");
+    setTimeout(function () {
+        $("#" + clr).removeClass("pressed");
     }, 100);
+}
+
+function startOver() {
+    level = 0
+    gamePattern = []
+    userClickedPattern = []
+    started = false
 }
